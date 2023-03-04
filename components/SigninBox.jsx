@@ -17,7 +17,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="">
         Snapay
       </Link>{' '}
       {new Date().getFullYear()}
@@ -25,26 +25,7 @@ function Copyright(props) {
     </Typography>
   );
 }
-const theme = createTheme(
-  {
-    palette: {
-      bgcolor: {
-        default: '#000'},
-      color: ''
-    }
-  }
-)
-// const theme = createTheme({
-//   palette: {
-//   primary: {
-//     main: "#3f37db",
-//     contrastText: "#000" //button text white instead of black
-//   },
-//   background: {
-//     default: "#fff"
-//   }
-// }
-// });
+const theme = createTheme()
 
 export default function SigninBox() {
   const handleSubmit = (event) => {
@@ -99,11 +80,12 @@ export default function SigninBox() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <Button 
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, color: 'black'}}
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => <Link href='/test'/>}
             >
               Sign In
             </Button>
