@@ -63,7 +63,6 @@ model suppliers {
   phonenumber        String?              @db.VarChar(255)
   credentials        credentials[]
   suppliers_projects suppliers_projects[]
-  users              users[]
 }
 
 model suppliers_projects {
@@ -75,9 +74,7 @@ model suppliers_projects {
 }
 
 model users {
-  user_id     Int       @id
-  username    String    @db.VarChar(255)
-  password    String    @db.VarChar(255)
-  supplier_id Int
-  suppliers   suppliers @relation(fields: [supplier_id], references: [supplier_id], onDelete: NoAction, onUpdate: NoAction)
+  username String @db.VarChar(255)
+  password String @db.VarChar(255)
+  user_id  Int    @id @default(autoincrement())
 }

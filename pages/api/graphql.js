@@ -1,10 +1,11 @@
-
-
-const main = async () => {
+const { gql } = require('@apollo/client') 
 const { PrismaClient } = require('@prisma/client') ;
 const { ApolloServer } = require('@apollo/server') ;
 const { makeExecutableSchema } = require('@graphql-tools/schema') ;
 const { startStandaloneServer } = require('@apollo/server/standalone') ;
+
+const main = async () => {
+
 
 const prisma = new PrismaClient();
 
@@ -66,10 +67,10 @@ const typeDefs = `
         supplier_id: Int!
     }
     type Users {
-        user_id: Int!
+        user_id: Int
         username: String!
         password: String!
-        supplier_id: Int!
+        supplier_id: Int
     } 
     type Query {
         ach_eft_detail: Ach_Eft_Detail
@@ -83,7 +84,7 @@ const typeDefs = `
         userPassword: [Users!]
     }
     type Mutation {
-        createUser(user_id: Int, username: String, password: String, suppliername: String): Users!
+        createUser(user_id: Int, username: String, password: String): Users!
     }
 `;
 
@@ -98,7 +99,19 @@ const resolvers = {
     },
     Mutation: {
         createUser: async (_, args) => {
-            console.log('hello world');
+            const { username, password } = args
+            console.log(username, password)
+            const newUser = await prisma.users.create({
+                data: {
+                    username,
+                    password
+                }
+            }) 
+            return {
+                user_id: newUser.user_id,
+                username: newUser.username,
+                password: newUser.password
+            }
         }
     }
 };
@@ -122,4 +135,19 @@ console.log(`🚀  Server ready at: ${url}`);
 }
 
 main();
+
+module.exports = {
+    createUser: gql`
+        mutation($username: String, $password: String){
+            createUser(username: $username, password: $password) {
+            username
+            user_id
+            password
+            }
+        }
+    `
+}
+
+
+
 
