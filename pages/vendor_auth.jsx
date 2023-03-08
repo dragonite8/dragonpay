@@ -1,6 +1,8 @@
 import React from 'react'
 
 const vendorAuth = () => {
+
+
   return (
     <div className='flex flex-col h-screen p-10 pb-40 mb-20 justify-center items-center'>
       <h2 className='text-2xl self-center p-14 text-gray-600'>New Vendor Registration</h2>
