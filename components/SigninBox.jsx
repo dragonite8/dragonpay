@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 
 function Copyright(props) {
   return (
@@ -28,6 +30,8 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function SigninBox() {
+  const { data: session } = useSession();
+console.log(session)
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -37,6 +41,15 @@ export default function SigninBox() {
     });
   };
 
+  if (session) {
+    return (
+      <div>
+        <p className='text-gray-800'>Welcome, {session.user.name}</p>
+        <button className='p-2 border m-2 rounded-md text-gray-800' onClick={() => signOut()}>Sign out</button>
+      </div>
+    )
+  }
+  else {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -85,11 +98,11 @@ export default function SigninBox() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => <Link href='/test'/>}
+              onClick={() => signIn()}
             >
               Sign In
             </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -100,11 +113,12 @@ export default function SigninBox() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
+}
 }
