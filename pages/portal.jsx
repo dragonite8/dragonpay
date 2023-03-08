@@ -9,8 +9,8 @@ const portal = () => {
   return (
     <div className='flex flex-col'>
       <Navbar />
-  
-      <div className='flex flex-col self-center max-w-[1400px] mt-44 p-8 h-full w-full bg-gray-100'>
+      <h2 className='pt-40 self-center text-4xl text-blue-900'>Payment Dashboard</h2>
+      <div className='flex flex-col self-center max-w-[1400px] mt-20 p-8 h-full w-full bg-gray-100'>
         <div className='my-10'>
           <Overview />
         </div>
