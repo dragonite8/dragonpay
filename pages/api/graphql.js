@@ -5,7 +5,6 @@ const { PrismaClient } = require('@prisma/client') ;
 const { ApolloServer } = require('@apollo/server') ;
 const { makeExecutableSchema } = require('@graphql-tools/schema') ;
 const { startStandaloneServer } = require('@apollo/server/standalone') ;
-    console.log()
 
 const prisma = new PrismaClient();
 
