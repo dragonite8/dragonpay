@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#bkg-pattern {
+  background: #c2efae;
+  background-image:  radial-gradient(#272da2 0.85px, transparent 0.5px), radial-gradient(#272da2 0.85px, #9aee7300 0.5px);
+  background-size: 40px 40px;
+  background-position: 0 0,20px 20px;
+}
+
+/* button,  [type='submit'] {
+  background-color: #272da2;
+} */
