@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Signin from '../components/SigninMain'
+import SigninForm from '@/components/SigninForm'
 
 export default function Home() {
   return (
