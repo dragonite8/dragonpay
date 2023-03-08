@@ -1,5 +1,6 @@
 import React from 'react'
 import SigninBox from './SigninBox'
+import SigninForm from './SigninForm'
 import logo from '../public/logo.png'
 import womancash from '../public/womancash.png'
 import Image from 'next/image'
@@ -18,7 +19,7 @@ const SigninMain = () => {
           <div className='overflow-clip flex h-full w-2/5 bg-white rounded-tr-2xl rounded-br-2xl justify-center content-center'>
             {/* sign in box */}
               <div className='flex content-center justify-center text-center self-center'>
-                <SigninBox />
+                <SigninForm />
               </div>
           </div>
 
