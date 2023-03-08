@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = "postgres://okjdfvmj:YD--tyh6meJJqk6c5Rlr5pWtGPqegH0s@queenie.db.elephantsql.com/okjdfvmj"
+}
+
+model ach_eft_detail {
+  xfer_id       Int      @id
+  payment_id    Int
+  paymentstatus Boolean
+  paymentmethod String?  @db.VarChar(255)
+  payments      payments @relation(fields: [payment_id], references: [payment_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model credentials {
+  credential_id    Int       @id
+  plaidaccesstoken String    @db.VarChar(255)
+  plaiditemid      String    @db.VarChar(255)
+  supplier_id      Int
+  suppliers        suppliers @relation(fields: [supplier_id], references: [supplier_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model payments {
+  payment_id     Int              @id
+  po_id          String?          @db.VarChar(255)
+  amount         Int
+  fxrate         Int
+  paid           Boolean
+  ach_eft_detail ach_eft_detail[]
+  purchaseorders purchaseorders?  @relation(fields: [po_id], references: [po_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model projects {
+  project_id         Int                  @id
+  projectname        String               @db.VarChar(255)
+  projectdescription String?              @db.VarChar(255)
+  projectamount      String               @db.VarChar(255)
+  customer_id        String               @db.VarChar(255)
+  purchaseorders     purchaseorders[]
+  suppliers_projects suppliers_projects[]
+}
+
+model purchaseorders {
+  po_id       String     @id @db.VarChar(255)
+  project_id  Int?
+  projectname String     @db.VarChar(255)
+  currency    String     @db.VarChar(255)
+  amount      String     @db.VarChar(255)
+  payments    payments[]
+  projects    projects?  @relation(fields: [project_id], references: [project_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model suppliers {
+  supplier_id        Int                  @id
+  suppliername       String?              @db.VarChar(255)
+  address            String?              @db.VarChar(255)
+  city               String?              @db.VarChar(255)
+  state              String?              @db.VarChar(255)
+  zip                String?              @db.VarChar(255)
+  phonenumber        String?              @db.VarChar(255)
+  credentials        credentials[]
+  suppliers_projects suppliers_projects[]
+  users              users[]
+}
+
+model suppliers_projects {
+  project_id            Int
+  supplier_id           Int
+  suppliers_projects_id Int       @id
+  projects              projects  @relation(fields: [project_id], references: [project_id], onDelete: NoAction, onUpdate: NoAction)
+  suppliers             suppliers @relation(fields: [supplier_id], references: [supplier_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  user_id     Int       @id
+  username    String    @db.VarChar(255)
+  password    String    @db.VarChar(255)
+  supplier_id Int
+  suppliers   suppliers @relation(fields: [supplier_id], references: [supplier_id], onDelete: NoAction, onUpdate: NoAction)
+}
