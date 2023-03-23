@@ -23,8 +23,8 @@ const fetch = require('node-fetch');
 const encodedParams = new URLSearchParams();
 
 encodedParams.set('AccountID', 'charleslam');
-encodedParams.set('Key', '7ccbd483b2b85159da35abd54621e05b440689d7');
-encodedParams.set('Signature', '1d382fb7486d2cc2a859832961eecccb5bf4f353');
+encodedParams.set('Key', '');
+encodedParams.set('Signature', '');
 encodedParams.set('RedirectURL', 'https://www.ptri8.com');
 encodedParams.set('CompanyName', 'CompanyWithLotsofBills, Inc.');
 encodedParams.set('Language', 'en');
